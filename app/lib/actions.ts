@@ -19,6 +19,7 @@ const FormSchema = z.object({
 });
  
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
+const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 
 export type State = {
   errors?: {
@@ -67,14 +68,12 @@ export async function createInvoice(prevState: State, formData: FormData) {
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
-
-// Use Zod to update the expected types
-const UpdateInvoice = FormSchema.omit({ id: true, date: true });
  
 // ...
  
-export async function updateInvoice(prevState: State, id: string, formData: FormData) {
-  const validatedFields = CreateInvoice.safeParse({
+export async function updateInvoice(id: string, prevState: State, formData: FormData) {
+  // Validate form using Zod
+  const validatedFields = UpdateInvoice.safeParse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
@@ -84,7 +83,7 @@ export async function updateInvoice(prevState: State, id: string, formData: Form
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Create Invoice.',
+      message: 'Missing Fields. Failed to Update Invoice.',
     };
   }
  
@@ -93,12 +92,13 @@ export async function updateInvoice(prevState: State, id: string, formData: Form
   const amountInCents = amount * 100;
   const date = new Date().toISOString().split('T')[0];
  
+  // Insert data into the database
   try {
     await sql`
-        UPDATE invoices
-        SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
-        WHERE id = ${id}
-      `;
+      UPDATE invoices
+      SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
+      WHERE id = ${id}
+    `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
@@ -106,6 +106,7 @@ export async function updateInvoice(prevState: State, id: string, formData: Form
     };
   }
  
+  // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
