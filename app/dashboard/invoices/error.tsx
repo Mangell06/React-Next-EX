@@ -1,7 +1,8 @@
-'use client';
+'use client'; // Se ejecuta en el lado del cliente
  
 import { useEffect } from 'react';
  
+// Controla los errores y muestra el mensaje "Something went wrong!" cada vez que ocurre.
 export default function Error({
   error,
   reset,

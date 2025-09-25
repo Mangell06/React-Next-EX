@@ -1,3 +1,4 @@
+// Pagina que se lanza cuando no encuentra la ruta que estas buscando.
 import Link from 'next/link';
 import { FaceFrownIcon } from '@heroicons/react/24/outline';
  

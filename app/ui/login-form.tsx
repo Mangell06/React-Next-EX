@@ -1,5 +1,6 @@
-'use client';
+'use client'; // Esto se cargada del lado del cliente
  
+// Importamos componentes.
 import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
@@ -12,7 +13,7 @@ import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/actions';
 import { useSearchParams } from 'next/navigation';
  
-export default function LoginForm() {
+export default function LoginForm() { // Formulario del Login qe usar useActionState para controlar los errores.
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
   const [errorMessage, formAction, isPending] = useActionState(

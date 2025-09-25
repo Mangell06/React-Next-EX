@@ -1,3 +1,4 @@
+// Funcionamiento y estructura html, de la barra de busqueda.
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';

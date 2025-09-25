@@ -1,3 +1,4 @@
+// Querys hacia la base de datos.
 import postgres from 'postgres';
 import {
   CustomerField,

@@ -1,5 +1,6 @@
-'use server';
+'use server'; // Esto se cargada desde el lado del servidor
 
+// Se encarga de autentificar, comparando datos de la base de datos con los entregados.
 import NextAuth from 'next-auth';
 import { authConfig } from './auth.config';
 import Credentials from 'next-auth/providers/credentials';

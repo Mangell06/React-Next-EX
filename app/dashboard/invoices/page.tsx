@@ -1,3 +1,4 @@
+// Importacion de componentes, funciones, estilos y tipos.
 import Pagination from '@/app/ui/invoices/pagination';
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/invoices/table';
@@ -8,11 +9,14 @@ import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 
+// Exportar componente meta data.
 export const metadata: Metadata = {
   title: 'Invoices',
 };
 
-export default async function Page(props: {
+// Exportar por defencto un componente, que es una funcion asyncrona.
+export default async function Page(props: { //Recibe tres props de busqueda, query y la pagina. Tras hacer la query, muestra los resultados de facturas, y las paginas.
+// Ejemplo: (1,2,3...).
   searchParams?: Promise<{
     query?: string;
     page?: string;

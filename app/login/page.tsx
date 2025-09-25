@@ -1,3 +1,4 @@
+// Importamos componentes para el login y logo. Tambien uno especial, para darle espera a otros componentes, mientras cargan datos o recursos.
 import AcmeLogo from '@/app/ui/acme-logo';
 import LoginForm from '@/app/ui/login-form';
 import { Suspense } from 'react';

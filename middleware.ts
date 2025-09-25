@@ -1,3 +1,4 @@
+// Esto se encarga de redirigir, en caso de intentar entras sin estar logeado, atraves de la url.
 import NextAuth from 'next-auth';
 import { authConfig } from './auth.config';
  
