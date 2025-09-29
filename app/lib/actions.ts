@@ -23,7 +23,7 @@ const FormSchema = z.object({ //Schema de objeto para los formularios.
 const CreateInvoice = FormSchema.omit({ id: true, date: true }); // Constante de formulario que obliga a tener la id.
 const UpdateInvoice = FormSchema.omit({ id: true, date: true }); // Constante de formulario que obliga a tener la id.
 
-export type State = { // tipo state para controlar errores.
+export type State = { // tipo state para controlar errores todos los parametros son opcionalesS.
   errors?: {
     customerId?: string[];
     amount?: string[];
@@ -34,7 +34,7 @@ export type State = { // tipo state para controlar errores.
 
 export async function createInvoice(prevState: State, formData: FormData) { // Funcion asincrona que controla la creacion de una factura.
   // Validate form using Zod
-  const validatedFields = CreateInvoice.safeParse({
+  const validatedFields = CreateInvoice.safeParse({ // Revisa que todo este bien.
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
@@ -74,9 +74,9 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
       message: 'Missing Fields. Failed to Update Invoice.',
     };
   }
-  const { customerId, amount, status } = validatedFields.data;
-  const amountInCents = amount * 100;
-  const date = new Date().toISOString().split('T')[0];
+  const { customerId, amount, status } = validatedFields.data; // Separa los datos del interior en tres variables.
+  const amountInCents = amount * 100; // Pasamos el amount a centimos.
+  const date = new Date().toISOString().split('T')[0]; // Creamos una fecha quitando la hora y pasandolo a String pero con formato ISO YYYY-MM-DD.
   try {
     await sql`
       UPDATE invoices
@@ -88,8 +88,8 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
       message: 'Database Error: Failed to Update Invoice.',
     };
   }
-  revalidatePath('/dashboard/invoices');
-  redirect('/dashboard/invoices');
+  revalidatePath('/dashboard/invoices'); // Recarga los datos
+  redirect('/dashboard/invoices'); // Redirige el usuario a Invoices
 }
 
 export async function deleteInvoice(id: string) { // Funcion asincrona que controla la eliminacion de una factura.
