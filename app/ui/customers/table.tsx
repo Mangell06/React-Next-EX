@@ -9,7 +9,7 @@ import {
 export default async function CustomersTable({
   customers,
 }: {
-  customers: FormattedCustomersTable[];
+  customers: FormattedCustomersTable[]; // Recibe tabla de clientes
 }) {
   return (
     <div className="w-full">

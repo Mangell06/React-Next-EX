@@ -12,7 +12,7 @@ import { Button } from '@/app/ui/button';
 import { updateInvoice, State } from '@/app/lib/actions';
 import { useActionState } from 'react';
 
-export default function EditInvoiceForm({
+export default function EditInvoiceForm({ // Recibe los datos de la factura y la lista de clientes, para saber de quien es y la modifica, si todo va bien si no lanza una excepcion.
   invoice,
   customers,
 }: {
