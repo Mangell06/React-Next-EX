@@ -11,7 +11,7 @@ export const metadata: Metadata = { // Crea la metadata
   metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 export const experimental_ppr = true; // Exporta una constante, para un tipo de carga mas inteligente y la deja en true.
-export default function Layout({ children }: { children: React.ReactNode }) { // Junto al hijo que recibe, crea una estructura donde coloca el SideNav.
+export default function Layout({ children }: { children: React.ReactNode }) { // Esto funciona como la plantilla donde Children es el page.tsx, y el resto es la plantilla de este directorio, y todos los hijos que no tengan Layout.tsx propio.
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
       <div className="w-full flex-none md:w-64">

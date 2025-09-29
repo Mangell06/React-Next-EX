@@ -12,7 +12,7 @@ export default function LoginPage() {
             <AcmeLogo />
           </div>
         </div>
-        <Suspense>
+        <Suspense> // Permite renderizado asincrono, eso significa que, puedes ver otras zonas que ya esten listas, mientras esperas que cargue esta.
           <LoginForm />
         </Suspense>
       </div>

@@ -7,7 +7,7 @@ const users = [
     email: 'user@nextmail.com',
     password: '123456',
   },
-];
+]; // Cuenta usuario.
 
 const customers = [
   {
@@ -46,7 +46,7 @@ const customers = [
     email: 'balazs@orban.com',
     image_url: '/customers/balazs-orban.png',
   },
-];
+]; // Compradores.
 
 const invoices = [
   {
@@ -127,7 +127,7 @@ const invoices = [
     status: 'paid',
     date: '2022-06-05',
   },
-];
+]; // Facturas.
 
 const revenue = [
   { month: 'Jan', revenue: 2000 },
@@ -142,6 +142,6 @@ const revenue = [
   { month: 'Oct', revenue: 2800 },
   { month: 'Nov', revenue: 3000 },
   { month: 'Dec', revenue: 4800 },
-];
+]; // Ingresos.
 
-export { users, customers, invoices, revenue };
+export { users, customers, invoices, revenue }; // Exportamos a todo.

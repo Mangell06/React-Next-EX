@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' }); // Para acceder a las variables Generales que son necesarias debemos hacer process.env.NOMBRE_VARIABLE
  
 const FormSchema = z.object({ //Schema de objeto para los formularios.
   id: z.string(),

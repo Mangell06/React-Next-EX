@@ -15,12 +15,12 @@ import { useSearchParams } from 'next/navigation';
  
 export default function LoginForm() { // Formulario del Login qe usar useActionState para controlar los errores.
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
-  const [errorMessage, formAction, isPending] = useActionState(
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'; // Tras iniciar sesion mira si hay alguna url de la web a la que volver si no la hay te envia directamente a dashboard
+  const [errorMessage, formAction, isPending] = useActionState( // Esto controla si a habido un error el mensaje, la funcion de iniciar sesion y si aun esta en proceso o ya a terminado.
     authenticate,
     undefined,
   );
- 
+  // AtSymbolIcon es el simbolo del arroba y KeyIcon el simbolo de la llave
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
@@ -86,4 +86,4 @@ export default function LoginForm() { // Formulario del Login qe usar useActionS
       </div>
     </form>
   );
-}
+} // A partir de { errorMesage&& } significa que si hay un error, muestra una señal de advertencia mas el mensaje de error en rojo, dentro de un contenedor al final del form.
