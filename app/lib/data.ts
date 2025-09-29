@@ -10,20 +10,14 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' }); // Acceso a las variables de entorno, en especifico a la url de la base de datos.
 
-export async function fetchRevenue() {
+export async function fetchRevenue() { // Busca todos los ingresos.
   try {
-    // Artificially delay a response for demo purposes.
-    // Don't do this in production :)
-
     console.log('Fetching revenue data...');
     await new Promise((resolve) => setTimeout(resolve, 3000));
-
     const data = await sql<Revenue[]>`SELECT * FROM revenue`;
-
     console.log('Data fetch completed after 3 seconds.');
-
     return data;
   } catch (error) {
     console.error('Database Error:', error);
@@ -31,7 +25,7 @@ export async function fetchRevenue() {
   }
 }
 
-export async function fetchLatestInvoices() {
+export async function fetchLatestInvoices() { // Busca las facturas mas recientes.
   try {
     const data = await sql<LatestInvoiceRaw[]>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
@@ -51,7 +45,7 @@ export async function fetchLatestInvoices() {
   }
 }
 
-export async function fetchCardData() {
+export async function fetchCardData() { // Query para las estaristicas de la empresa, de cuanto se a pagado y cuanto esta pendiente.
   try {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
@@ -87,7 +81,7 @@ export async function fetchCardData() {
 }
 
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredInvoices(
+export async function fetchFilteredInvoices( // Buscar facturas filtradas
   query: string,
   currentPage: number,
 ) {
@@ -122,7 +116,7 @@ export async function fetchFilteredInvoices(
   }
 }
 
-export async function fetchInvoicesPages(query: string) {
+export async function fetchInvoicesPages(query: string) { // Buscar y calcular cuantas paginas hacen falta para cubrir todas las facturas del query.
   try {
     const data = await sql`SELECT COUNT(*)
     FROM invoices
@@ -143,7 +137,7 @@ export async function fetchInvoicesPages(query: string) {
   }
 }
 
-export async function fetchInvoiceById(id: string) {
+export async function fetchInvoiceById(id: string) { // Buscar facturas por id.
   try {
     const data = await sql<InvoiceForm[]>`
       SELECT
@@ -168,7 +162,7 @@ export async function fetchInvoiceById(id: string) {
   }
 }
 
-export async function fetchCustomers() {
+export async function fetchCustomers() { //Buscar el id y nombre de todos los clientes en orden alfabetico por el nombre
   try {
     const customers = await sql<CustomerField[]>`
       SELECT
@@ -185,7 +179,7 @@ export async function fetchCustomers() {
   }
 }
 
-export async function fetchFilteredCustomers(query: string) {
+export async function fetchFilteredCustomers(query: string) { // Buscar a los cliente igual que antes pero filtrando.
   try {
     const data = await sql<CustomersTableType[]>`
 		SELECT
