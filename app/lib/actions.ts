@@ -1,9 +1,9 @@
 'use server'; // Se ejecuta del lado del servidor
 
-import { z } from 'zod';
+import { z } from 'zod'; // Funciona como un validador, para evitar datos erroneos que peten el programa.
 import postgres from 'postgres';
-import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation'; // Permite redirigir al usuario a otra url.
+import { revalidatePath } from 'next/cache'; // Permite recargar los datos en cache de la web.
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
@@ -23,8 +23,8 @@ const FormSchema = z.object({ //Schema de objeto para los formularios.
 const CreateInvoice = FormSchema.omit({ id: true, date: true }); // Constante de formulario que obliga a tener la id.
 const UpdateInvoice = FormSchema.omit({ id: true, date: true }); // Constante de formulario que obliga a tener la id.
 
-export type State = { // tipo state para controlar errores todos los parametros son opcionalesS.
-  errors?: {
+export type State = { // tipo state para controlar errores todos los parametros son opcionales.
+  errors?: { // Aqui guarda el campo donde tiene un problema.
     customerId?: string[];
     amount?: string[];
     status?: string[];
@@ -102,14 +102,14 @@ export async function authenticate( // Se encarga de los errores de la authentif
   formData: FormData,
 ) {
   try {
-    await signIn('credentials', formData);
+    await signIn('credentials', formData); // Prueba a iniciar sesion con los datos proporcionados.
   } catch (error) {
-    if (error instanceof AuthError) {
+    if (error instanceof AuthError) { // Si no puede porque a fallado la autenticacion.
       switch (error.type) {
         case 'CredentialsSignin':
-          return 'Invalid credentials.';
+          return 'Invalid credentials.'; // En el caso de las credenciales de vuelve credenciales invalidas
         default:
-          return 'Something went wrong.';
+          return 'Something went wrong.'; // En cualquier otro caso que a habido un error
       }
     }
     throw error;

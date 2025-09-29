@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 export default async function Page(props: { //Recibe tres props de busqueda, query y la pagina. Tras hacer la query, muestra los resultados de facturas, y las paginas.
 // Ejemplo: (1,2,3...).
   searchParams?: Promise<{
-    query?: string;
-    page?: string;
+    query?: string; // Opcional pero contiene una query.
+    page?: string; // Opcional pero contiene una url de page.
   }>;
 }) {
   const searchParams = await props.searchParams;
@@ -35,11 +35,11 @@ export default async function Page(props: { //Recibe tres props de busqueda, que
         <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-        <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-        <Table query={query} currentPage={currentPage} />
+        <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}> // Puedes ver el resto de la pagina mientras carga.
+        <Table query={query} currentPage={currentPage} /> // Tabla donde sale el resultado de la query.
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} />
+        <Pagination totalPages={totalPages} /> // Total de paginas.
       </div>
     </div>
   );
