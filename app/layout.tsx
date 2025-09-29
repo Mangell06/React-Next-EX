@@ -2,7 +2,7 @@ import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 
 
-export default function RootLayout({ // En vuelve todo en una estructura html con body.
+export default function RootLayout({ // Envuelve todo en una estructura html con body.
   children,
 }: {
   children: React.ReactNode;
