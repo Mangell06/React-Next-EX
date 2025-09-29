@@ -5,7 +5,7 @@ import AcmeLogo from '@/app/ui/acme-logo';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
  
-export default function SideNav() { // Este componente crea el nav del dashboard
+export default function SideNav() { // Este componente crea el nav del Layout y se le implementa el componente NavLinks, entre otros para que contenga los links, AcmeLogo para el Logo y PowerIcon para el icono de apagado, que representa el cierre de sesion.
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2">
       <Link

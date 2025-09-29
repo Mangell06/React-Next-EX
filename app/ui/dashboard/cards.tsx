@@ -7,14 +7,14 @@ import {
 import { lusitana } from '@/app/ui/fonts';
 import { fetchCardData } from '@/app/lib/data';
 
-const iconMap = {
+const iconMap = { // Iconos segun el tipo de Card
   collected: BanknotesIcon,
   customers: UserGroupIcon,
   pending: ClockIcon,
   invoices: InboxIcon,
 };
 
-export default async function CardWrapper() {
+export default async function CardWrapper() { // Crea varias secciones en la pagina que muestran el total pagado, el pendiente y el total entre los dos. Por ultimo, otra que muestra el total de clientes.
   const {
     numberOfInvoices,
     numberOfCustomers,
@@ -35,7 +35,7 @@ export default async function CardWrapper() {
   );
 }
 
-export function Card({
+export function Card({ // Crea distinto tipos de tarjetas con su titulo, valor y icono segun el tipo.
   title,
   value,
   type,

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchLatestInvoices } from '@/app/lib/data';
 
-export default async function LatestInvoices() { // Remove props
+export default async function LatestInvoices() { // busca las ultimas facturas para mostrarlas en un div junto a su amount, email y nombre del cliente.
   const latestInvoices = await fetchLatestInvoices();
   return (
     <div className="flex w-full flex-col md:col-span-4">

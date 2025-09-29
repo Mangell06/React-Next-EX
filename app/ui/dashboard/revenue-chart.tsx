@@ -10,7 +10,7 @@ import { Revenue } from '@/app/lib/definitions';
 // https://www.chartjs.org/
 // https://airbnb.io/visx/
 
-export default async function RevenueChart() {
+export default async function RevenueChart() { // Genera un grafico de barras en base a los ingresos
   const revenue = await fetchRevenue();
 
   const chartHeight = 350;
