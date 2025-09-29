@@ -2,16 +2,16 @@ import { clsx } from 'clsx';
 import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
 
-interface Breadcrumb {
+interface Breadcrumb { //Contiene un label, una url, y si actualemente esta o no en esa pagina.
   label: string;
   href: string;
   active?: boolean;
 }
 
-export default function Breadcrumbs({
+export default function Breadcrumbs({ // Mantiene un pequeño hisorial de las paginas a las que has entrado, permitiendo volver hacia atras y entre otras funciones, permite que personas que usen lector de pantalla sepan su recorrido mejor.
   breadcrumbs,
 }: {
-  breadcrumbs: Breadcrumb[];
+  breadcrumbs: Breadcrumb[]; //El historial decada pagina lo mantiene en una lista.
 }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-6 block">
