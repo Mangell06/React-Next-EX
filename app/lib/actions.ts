@@ -33,8 +33,8 @@ export type State = { // tipo state para controlar errores todos los parametros 
 };
 
 export async function createInvoice(prevState: State, formData: FormData) { // Funcion asincrona que controla la creacion de una factura.
-  // Validate form using Zod
-  const validatedFields = CreateInvoice.safeParse({ // Revisa que todo este bien.
+  // Validado con Zod.
+  const validatedFields = CreateInvoice.safeParse({ 
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
