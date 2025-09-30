@@ -1,29 +1,30 @@
 // Importacion de componentes, funciones, estilos y tipos.
-import Pagination from '@/app/ui/invoices/pagination';
-import Search from '@/app/ui/search';
-import Table from '@/app/ui/invoices/table';
-import { CreateInvoice } from '@/app/ui/invoices/buttons';
-import { lusitana } from '@/app/ui/fonts';
-import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
-import { Suspense } from 'react';
-import { fetchInvoicesPages } from '@/app/lib/data';
-import { Metadata } from 'next';
+import Pagination from "@/app/ui/invoices/pagination";
+import Search from "@/app/ui/search";
+import Table from "@/app/ui/invoices/table";
+import { CreateInvoice } from "@/app/ui/invoices/buttons";
+import { lusitana } from "@/app/ui/fonts";
+import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
+import { Suspense } from "react";
+import { fetchInvoicesPages } from "@/app/lib/data";
+import { Metadata } from "next";
 
 // Exportar componente meta data.
 export const metadata: Metadata = {
-  title: 'Invoices',
+  title: "Invoices",
 };
 
 // Exportar por defencto un componente, que es una funcion asyncrona.
-export default async function Page(props: { //Recibe tres props de busqueda, query y la pagina. Tras hacer la query, muestra los resultados de facturas, y las paginas.
-// Ejemplo: (1,2,3...).
+export default async function Page(props: {
+  //Recibe tres props de busqueda, query y la pagina. Tras hacer la query, muestra los resultados de facturas, y las paginas.
+  // Ejemplo: (1,2,3...).
   searchParams?: Promise<{
     query?: string; // Opcional pero contiene una query.
     page?: string; // Opcional pero contiene una url de page.
   }>;
 }) {
   const searchParams = await props.searchParams;
-  const query = searchParams?.query || '';
+  const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchInvoicesPages(query);
   return (
@@ -35,11 +36,11 @@ export default async function Page(props: { //Recibe tres props de busqueda, que
         <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-        <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}> // Puedes ver el resto de la pagina mientras carga.
-        <Table query={query} currentPage={currentPage} /> // Tabla donde sale el resultado de la query.
+      <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+        <Table query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} /> // Total de paginas.
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );
