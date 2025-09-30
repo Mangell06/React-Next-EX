@@ -4,7 +4,7 @@ import Image from "next/image";
 import { lusitana } from "@/app/ui/fonts";
 import { fetchLatestInvoices } from "@/app/lib/data";
 
-// En una export default function no es necesario importarla exactamente con el mismo nombre y cada vez que importe en este componente entonces cogeda sin preguntar si o si la funcion default.
+// Por ahora no tiene mucha importancia el default.
 
 export default async function LatestInvoices() {
   // busca las ultimas facturas para mostrarlas en un div junto a su amount, email y nombre del cliente.
