@@ -4,7 +4,7 @@ import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 
-export default async function InvoicesTable({ //tabla para ver las facturas de todos lso clientes.
+export default async function InvoicesTable({ //tabla para ver las facturas de todos los clientes.
   query,
   currentPage,
 }: {

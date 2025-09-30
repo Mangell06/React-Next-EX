@@ -4,6 +4,8 @@ import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
+// Las funciones anonimas son aquellas que esperan la respuesta de otro proceso, como una funcion, una consulta, etc. Por ejemplo: usando await en una consulta sql. Hasta que no le entrega el resultado, no sigue con el resto de la funcion.
+
 async function seedUsers() {
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
   await sql`
