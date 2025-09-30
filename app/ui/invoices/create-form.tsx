@@ -1,18 +1,19 @@
-'use client';
+"use client";
 
-import { CustomerField } from '@/app/lib/definitions';
-import Link from 'next/link';
+import { CustomerField } from "@/app/lib/definitions";
+import Link from "next/link";
 import {
   CheckIcon,
   ClockIcon,
   CurrencyDollarIcon,
   UserCircleIcon,
-} from '@heroicons/react/24/outline';
-import { Button } from '@/app/ui/button';
-import { createInvoice, State } from '@/app/lib/actions';
-import { useActionState } from 'react';
+} from "@heroicons/react/24/outline";
+import { Button } from "@/app/ui/button";
+import { createInvoice, State } from "@/app/lib/actions";
+import { useActionState } from "react";
 
-export default function Form({ customers }: { customers: CustomerField[] }) { // Recibe una lista de clientes, para que puedas seleccionar a quien crear le, la factura.
+export default function Form({ customers }: { customers: CustomerField[] }) {
+  // Recibe una lista de clientes, para que puedas seleccionar a quien crear le, la factura.
   const initialState: State = { message: null, errors: {} };
   const [state, formAction] = useActionState(createInvoice, initialState);
   return (
@@ -109,7 +110,13 @@ export default function Form({ customers }: { customers: CustomerField[] }) { //
         >
           Cancel
         </Link>
-        <Button type="submit" onClick={() => console.log("hola")} className='h-11'>Create Invoice</Button>
+        <Button
+          type="submit"
+          onClick={() => console.log("hola")}
+          className="h-11"
+        >
+          Create Invoice
+        </Button>
       </div>
     </form>
   );
