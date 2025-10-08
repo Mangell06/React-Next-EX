@@ -1,24 +1,26 @@
-'use client'; // Esto se cargada del lado del cliente
- 
+"use client"; // Esto se cargada del lado del cliente
+
 // Importamos componentes.
-import { lusitana } from '@/app/ui/fonts';
+import { lusitana } from "@/app/ui/fonts";
 import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
-} from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Button } from './button';
-import { useActionState } from 'react';
-import { authenticate } from '@/app/lib/actions';
-import { useSearchParams } from 'next/navigation';
- 
-export default function LoginForm() { // Formulario del Login qe usar useActionState para controlar los errores.
+} from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { Button } from "./button";
+import { useActionState } from "react";
+import { authenticate } from "@/app/lib/actions";
+import { useSearchParams } from "next/navigation";
+
+export default function LoginForm() {
+  // Formulario del Login que usa useActionState para controlar los errores.
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'; // Tras iniciar sesion mira si hay alguna url de la web a la que volver si no la hay te envia directamente a dashboard
-  const [errorMessage, formAction, isPending] = useActionState( // Esto controla si a habido un error el mensaje, la funcion de iniciar sesion y si aun esta en proceso o ya a terminado.
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard"; // Tras iniciar sesion mira si hay alguna url de la web a la que volver si no la hay te envia directamente a dashboard
+  const [errorMessage, formAction, isPending] = useActionState(
+    // Esto controla si a habido un error el mensaje, la funcion de iniciar sesion y si aun esta en proceso o ya a terminado.
     authenticate,
-    undefined,
+    undefined
   );
   // AtSymbolIcon es el simbolo del arroba y KeyIcon el simbolo de la llave
   return (
@@ -68,17 +70,18 @@ export default function LoginForm() { // Formulario del Login qe usar useActionS
             </div>
           </div>
         </div>
-        <input type='hidden' name='redirectTo' value={callbackUrl} />
+        <input type="hidden" name="redirectTo" value={callbackUrl} />
         <Button className="mt-4 w-full" aria-disabled={isPending}>
           Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
         <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
-          aria-atomic="true">
+          aria-atomic="true"
+        >
           {errorMessage && (
             <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500"/>
+              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
               <p className="text-sm text-red-500">{errorMessage}</p>
             </>
           )}
