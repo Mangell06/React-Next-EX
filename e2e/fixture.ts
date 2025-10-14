@@ -10,21 +10,21 @@ export class Fixture {
     }
 
     async goto() {
-        await this.page.goto("localhost:3000");
-    }
-
-    async setinputWriteLabel(newTextLabel: string, text: string) {
-        this.inputWrite = this.page.getByLabel(newTextLabel); 
-        await this.inputWrite?.fill(text);
+        await this.page.goto("http://localhost:3000");
     }
 
     async setinputWriteRole(nameText: string, text: string) {
-        this.inputWrite = this.page.getByRole('textbox',{name : nameText}); 
+        this.inputWrite = await this.page.getByRole('textbox',{name : nameText}); 
         await this.inputWrite?.fill(text);
     }
 
-    async setChooseSelector(newTextLabel: string, option: string) {
-        this.selector = this.page.getByLabel(newTextLabel);
+    async setspinbuttonWriteRole(nameText: string, text: string) {
+        this.inputWrite = await this.page.getByRole('spinbutton',{name : nameText}); 
+        await this.inputWrite?.fill(text);
+    }
+
+    async setChooseSelector(newNameSelector: string, option: string) {
+        this.selector = await this.page.getByRole('combobox',{name: newNameSelector});
         await this.selector.selectOption(option);
     }
 
@@ -32,11 +32,10 @@ export class Fixture {
         await this.page.getByRole('link',{name: newNameButton}).click();
     }
 
-    async buttonClick(newNameButton: string) {
+    async buttonRoleClick(newNameButton: string) {
         await this.page.getByRole('button',{name: newNameButton}).click();
     }
-
-    async buttonLabelClick(newTextLabel: string) {
-        await this.page.getByLabel(newTextLabel).click();
+    async checkBoxClick(newNameButton: string) {
+        await this.page.getByRole('radio',{name: newNameButton}).click();
     }
 }

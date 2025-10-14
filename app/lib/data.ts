@@ -10,7 +10,9 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' }); // Acceso a las variables de entorno, en especifico a la url de la base de datos.
+const sql = postgres(process.env.DATABASE_URL!, {
+  ssl: false // Omitir SSL para local
+}); // Acceso a las variables de entorno, en especifico a la url de la base de datos.
 
 export async function fetchRevenue() { // Busca todos los ingresos.
   try {

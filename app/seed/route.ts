@@ -2,7 +2,9 @@ import bcrypt from 'bcrypt';
 import postgres from 'postgres';
 import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const sql = postgres(process.env.DATABASE_URL!, {
+  ssl: false // Omitir SSL para local
+});
 
 // Las funciones anonimas son aquellas que esperan la respuesta de otro proceso, como una funcion, una consulta, etc. Por ejemplo: usando await en una consulta sql. Hasta que no le entrega el resultado, no sigue con el resto de la funcion.
 
