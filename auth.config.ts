@@ -1,23 +1,23 @@
-// Importamos el tipo, para la configuracion de la autentificacion en la web.
-import type { NextAuthConfig } from 'next-auth';
- 
-export const authConfig = { // Exportamos la constante, que tiene la ruta de la pagina de login.
+import type { Session } from "next-auth";
+
+export const authConfig = {
   pages: {
-    signIn: '/login',
+    signIn: "/login",
   },
- 
-callbacks: { // Hazemos una llamada para validar el usuario.
-    authorized({ auth, request: { nextUrl } }) {
+  callbacks: {
+    authorized({
+      auth,
+      request,
+    }: {
+      auth: { user?: Session["user"] } | null;
+      request: { nextUrl: URL };
+    }) {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-      if (isOnDashboard) { // Si no esta aun logeado o antes a cerrado sesion.
-        if (isLoggedIn) return true; // Si es valido de vuelve True.
-        return false; // Si no de vuelve false.
-      } else if (isLoggedIn) { // Si esta logeado, lo redirigimos directamente.
-        return Response.redirect(new URL('/dashboard', nextUrl));
-      }
+      const isOnDashboard = request.nextUrl.pathname.startsWith("/dashboard");
+      if (isOnDashboard) return isLoggedIn;
+      if (isLoggedIn) return Response.redirect(new URL("/dashboard", request.nextUrl));
       return true;
     },
   },
   providers: [],
-} satisfies NextAuthConfig;
+};
