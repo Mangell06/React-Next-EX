@@ -4,91 +4,35 @@ const { Fixture } = require('./fixture');
 
 const email = process.env.USER_EMAIL!;
 const password = process.env.PASSWORD!;
+let fixture : typeof Fixture;
 
-test.describe('Create Invoice Chromium', {tag:"@chromium"} ,() => {
-  let fixture: typeof Fixture;
-
-  test.beforeAll(async ()=>{
+test.beforeAll(async () => {
     const browser = await chromium.launch();
     const context = await browser.newContext(devices['Desktop Chrome']);
     const page = await context.newPage();
-    fixture = new Fixture(page);
+    fixture = await new Fixture(page);
     await fixture.goto();
-    await fixture.buttonLinkClick("Log in");
-  });
-
-  test.afterAll(async () => {
-    await fixture.page.locator('nav >> button').last().await page.goto('http://localhost:3000/');
-    click();
-  });
-
-  test('Login',async () => {
-    await fixture.setinputWriteRole("Email", email);
-    await fixture.setinputWriteRole("Password", password);
-    await fixture.buttonRoleClick("Log in");
-  });
-
+    await fixture.visibleText('Welcome to Acme. This is the');
+    await fixture.clickLinkRole('Log in');
+    await fixture.writeInputRole('Email',email);
+    await fixture.writeInputRole('Password',password);
+    await fixture.clickButtonRole('Log in');
+    await fixture.waitChanges('**/dashboard');
 });
 
-test.describe('Create Invoice FireFox', {tag:"@Firefox"} ,() => {
-  let fixture: typeof Fixture;
-
-  test.beforeAll(async ()=>{
-    const browser = await firefox.launch();
-    const context = await browser.newContext(devices['Desktop Firefox']);
-    const page = await context.newPage();
-    fixture = new Fixture(page);
-    await fixture.goto();
-    await fixture.buttonLinkClick("Log in");
-  });
-
-  test.afterAll(async () => {
-    await fixture.buttonRoleClick("Sign Out");
-  });
-
-  test('Login',async () => {
-    await fixture.setinputWriteRole("Email", email);
-    await fixture.setinputWriteRole("Password", password);
-    await fixture.buttonRoleClick("Log in");
-  });
-
-  test('Make the Creation',async () => {
-    await fixture.buttonLinkClick("Invoices");
-    await fixture.buttonLinkClick("Create Invoice");
-    await fixture.setChooseSelector("Choose customer","Amy Burns");
-    await fixture.setspinbuttonWriteRole("Choose an amount","20500");
-    await fixture.checkBoxClick("Pending");
-    await fixture.buttonRoleClick("Create Invoice");
-  });
-
+test('Create Invoice', async () => {
+  await fixture.clickLinkRole('Invoices');
+  await fixture.waitChanges('**/invoices');
+  await fixture.clickLinkRole('Create Invoice');
+  await fixture.waitChanges('**/create');
+  await fixture.chooseSelectRole('Choose customer','Balazs Orban');
+  await fixture.writeSpinbuttonRole('Choose an amount','250');
+  await fixture.selectCheckBox('Pending');
+  await fixture.clickButtonRole('Create Invoice');
 });
 
-test.describe('Edit invoice Chromium',{tag:"@chromium"},() => {
-  let fixture: typeof Fixture;
-
-  test.beforeAll(async ()=>{
-    const browser = await chromium.launch();
-    const context = await browser.newContext(devices['Desktop Chrome']);
-    const page = await context.newPage();
-    fixture = new Fixture(page);
-    await fixture.goto();
-    await fixture.buttonLinkClick("Log in");
-  });
-
-  test.afterAll(async () => {
-    await fixture.buttonRoleClick("Sign Out");
-  });
-
-  test('Login',async () => {
-    await fixture.setinputWriteRole("Email", email);
-    await fixture.setinputWriteRole("Password", password);
-    await fixture.buttonRoleClick("Log in");
-  });
-
-  test('Edit the Invoice',async () => {
-    await fixture.buttonLinkClick("Invoices");
-  });
+test('Remove Invoice', async () => {
+  await fixture.clickLinkRole('Invoices');
+  await fixture.waitChanges('**/invoices');
+  await fixture.clickOneButtonofArray('Delete',1);
 });
-
-
-

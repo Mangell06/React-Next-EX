@@ -10,32 +10,43 @@ export class Fixture {
     }
 
     async goto() {
-        await this.page.goto("http://localhost:3000");
+        await this.page.goto("http://localhost:3000/");
     }
 
-    async setinputWriteRole(nameText: string, text: string) {
-        this.inputWrite = await this.page.getByRole('textbox',{name : nameText}); 
-        await this.inputWrite?.fill(text);
+    async waitChanges(url: string) {
+        await this.page.waitForURL(url);
     }
 
-    async setspinbuttonWriteRole(nameText: string, text: string) {
-        this.inputWrite = await this.page.getByRole('spinbutton',{name : nameText}); 
-        await this.inputWrite?.fill(text);
+    async visibleText(text: string) {
+        await this.page.getByText(text);
     }
 
-    async setChooseSelector(newNameSelector: string, option: string) {
-        this.selector = await this.page.getByRole('combobox',{name: newNameSelector});
-        await this.selector.selectOption(option);
+    async clickLinkRole(nameSend: string) {
+        await this.page.getByRole('link', { name: nameSend }).click();
     }
 
-    async buttonLinkClick(newNameButton: string) {
-        await this.page.getByRole('link',{name: newNameButton}).click();
+    async writeInputRole(nameSend: string, text: string) {
+        await this.page.getByRole('textbox', { name: nameSend }).fill(text);
     }
 
-    async buttonRoleClick(newNameButton: string) {
-        await this.page.getByRole('button',{name: newNameButton}).click();
+    async clickButtonRole(nameSend: string) {
+        await this.page.getByRole('button', { name: nameSend }).click();
     }
-    async checkBoxClick(newNameButton: string) {
-        await this.page.getByRole('radio',{name: newNameButton}).click();
+
+    async chooseSelectRole(nameSend: string, option: string) {
+        await this.page.getByRole('combobox', { name: nameSend }).selectOption(option);
     }
+
+    async writeSpinbuttonRole(nameSend: string, numbers: string) {
+        await this.page.getByRole('spinbutton', { name: nameSend }).fill(numbers);
+    }
+
+    async selectCheckBox(nameSend: string) {
+        await this.page.getByRole('radio', { name: nameSend }).check();
+    }
+
+    async clickOneButtonofArray(nameSend: string, index: number){
+        await this.page.getByRole('button', { name: nameSend }).nth(index-1).click();
+    }
+
 }
