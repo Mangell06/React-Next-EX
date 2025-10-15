@@ -18,7 +18,7 @@ test.beforeAll(async () => {
     await fixture.writeInputRole('Password',password);
     await fixture.clickButtonRole('Log in');
     await fixture.waitChanges('**/dashboard');
-});
+})
 
 test('Create Invoice', async () => {
   await fixture.clickLinkRole('Invoices');
@@ -29,10 +29,24 @@ test('Create Invoice', async () => {
   await fixture.writeSpinbuttonRole('Choose an amount','250');
   await fixture.selectCheckBox('Pending');
   await fixture.clickButtonRole('Create Invoice');
-});
+})
 
-test('Remove Invoice', async () => {
-  await fixture.clickLinkRole('Invoices');
-  await fixture.waitChanges('**/invoices');
-  await fixture.clickOneButtonofArray('Delete',1);
-});
+test('Edit Invoice', async () => {
+    await fixture.clickLinkRole('Invoices');
+    await fixture.waitChanges('**/invoices');
+    await fixture.navigationRandom();
+    await fixture.clickOneEditsRandom();
+    await fixture.changeInvoiceStatus();
+    await fixture.clickButtonRole('Edit Invoice');
+    await fixture.clickLinkRole('Home');
+    await fixture.waitChanges('**/dashboard');
+})
+
+test('Delete Invoice', async () => {
+    await fixture.clickLinkRole('Invoices');
+    await fixture.waitChanges('**/invoices');
+    await fixture.navigationRandom();
+    await fixture.clickOneDeleteRandom();
+    await fixture.clickLinkRole('Home');
+    await fixture.waitChanges('**/dashboard');
+})

@@ -119,10 +119,12 @@ function PaginationArrow({
       <ArrowRightIcon className="w-4" />
     );
 
+  const namelink = direction === "left" ? "leftArrow" : "rightArrow";
+
   return isDisabled ? (
     <div className={className}>{icon}</div>
   ) : (
-    <Link className={className} href={href}>
+    <Link className={className} aria-label={namelink} href={href}>
       {icon}
     </Link>
   );
